@@ -14,6 +14,7 @@
 		18BD62842203A7EC0009A965 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18BD62832203A7EC0009A965 /* Assets.xcassets */; };
 		18BD62872203A7EC0009A965 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BD62852203A7EC0009A965 /* LaunchScreen.storyboard */; };
 		18BD628F2203A8070009A965 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD628E2203A8070009A965 /* PushButton.swift */; };
+		D082BEA02204D4C40037B38E /* 1-FloUnitCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = D082BE9F2204D4C40037B38E /* 1-FloUnitCircle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		18BD62862203A7EC0009A965 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18BD62882203A7EC0009A965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18BD628E2203A8070009A965 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
+		D082BE9F2204D4C40037B38E /* 1-FloUnitCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-FloUnitCircle.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		18BD627B2203A7EB0009A965 /* DrinkingWater */ = {
 			isa = PBXGroup;
 			children = (
+				D082BE9F2204D4C40037B38E /* 1-FloUnitCircle.png */,
 				180DB06A2203DDC800AB1427 /* CounterView.swift */,
 				18BD627C2203A7EB0009A965 /* AppDelegate.swift */,
 				18BD627E2203A7EB0009A965 /* ViewController.swift */,
@@ -131,6 +134,7 @@
 				18BD62872203A7EC0009A965 /* LaunchScreen.storyboard in Resources */,
 				18BD62842203A7EC0009A965 /* Assets.xcassets in Resources */,
 				18BD62822203A7EB0009A965 /* Main.storyboard in Resources */,
+				D082BEA02204D4C40037B38E /* 1-FloUnitCircle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
