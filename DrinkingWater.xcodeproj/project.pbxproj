@@ -42,7 +42,6 @@
 		18BD62702203A7EB0009A965 = {
 			isa = PBXGroup;
 			children = (
-				180DB06A2203DDC800AB1427 /* CounterView.swift */,
 				18BD627B2203A7EB0009A965 /* DrinkingWater */,
 				18BD627A2203A7EB0009A965 /* Products */,
 			);
@@ -59,6 +58,7 @@
 		18BD627B2203A7EB0009A965 /* DrinkingWater */ = {
 			isa = PBXGroup;
 			children = (
+				180DB06A2203DDC800AB1427 /* CounterView.swift */,
 				18BD627C2203A7EB0009A965 /* AppDelegate.swift */,
 				18BD627E2203A7EB0009A965 /* ViewController.swift */,
 				18BD62802203A7EB0009A965 /* Main.storyboard */,
