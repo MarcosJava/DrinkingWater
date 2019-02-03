@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension CGFloat {
+    public static func radius(by degree: Double) -> CGFloat {
+        return CGFloat(degree * .pi / 180)
+    }
+}
+
 @IBDesignable class CounterView: UIView {
     
     private struct Constants {
@@ -20,9 +26,20 @@ import UIKit
         }
     }
     
-    @IBInspectable var counter: Int = 5
-    @IBInspectable var outlineColor: UIColor = UIColor.blue
-    @IBInspectable var counterColor: UIColor = UIColor.orange
+    @IBInspectable
+    var counter: Int = 5 {
+        didSet {
+            if counter <= Constants.numberOfGlasses && counter >= 0 {
+                setNeedsDisplay()
+            }
+        }
+    }
+    
+    @IBInspectable
+    var outlineColor: UIColor = UIColor.blue
+    
+    @IBInspectable
+    var counterColor: UIColor = UIColor.orange
     
     override func draw(_ rect: CGRect) {
         // 1. Define the center point of the view where you’ll rotate the arc around.
@@ -35,18 +52,18 @@ import UIKit
         let startAngle: CGFloat = 3 * .pi / 4
         let endAngle: CGFloat = .pi / 4
         
-        // 4. Create a path based on the center point, radius, and angles you just defined.
-        let path = UIBezierPath(arcCenter: center,
-                                radius: radius/2 - Constants.arcWidth/2,
-                                startAngle: startAngle,
-                                endAngle: endAngle,
-                                clockwise: true)
+        if startAngle == (135 * .pi / 180 ) && startAngle == .radius(by: 135){
+            print("Sim Start")
+        }
+        if endAngle == ( 45 * .pi / 180) && endAngle == .radius(by: 45) {
+            print("Sim End")
+        }
         
-        // 5. Set the line width and color before finally stroking the path.
-        path.lineWidth = Constants.arcWidth
-        counterColor.setStroke()
-        path.stroke()
-        
+        self.drawInnerlinePath(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle)
+        self.drawOutlinePath(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle)
+    }
+    
+    private func drawOutlinePath(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat) {
         
         //1 - first calculate the difference between the two angles
         //ensuring it is positive
@@ -69,13 +86,28 @@ import UIKit
                            startAngle: outlineEndAngle,
                            endAngle: startAngle,
                            clockwise: false)
-        
+
         //4 - close the path
         outlinePath.close()
         
         outlineColor.setStroke()
         outlinePath.lineWidth = Constants.lineWidth
         outlinePath.stroke()
+    }
+    
+    private func drawInnerlinePath(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat) {
+        // 1. Create a path based on the center point, radius, and angles you just defined.
+        let path = UIBezierPath(arcCenter: center,
+                                radius: radius/2 - Constants.arcWidth/2,
+                                startAngle: startAngle,
+                                endAngle: endAngle,
+                                clockwise: true)
+        
+        // 2. Set the line width and color before finally stroking the path.
+        path.lineWidth = Constants.arcWidth
+        counterColor.setStroke()
+        path.stroke()
+        
     }
     
 }
