@@ -34,7 +34,30 @@ class GraphView: UIView {
         let height = rect.height
         
         roundedCorner(rect)
-        fillupGradienteColor()
+        
+        //CG drawing functions need to know the context in which they will draw, so you use the UIKit method UIGraphicsGetCurrentContext() to obtain the current context
+        let context = UIGraphicsGetCurrentContext()!
+        let colors = [startColor.cgColor, endColor.cgColor];
+        
+        // All contexts have a color space. This could be CMYK or grayscale, but here you’re using the RGB color space.
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        // The color stops describe where the colors in the gradient change over. In this example, you only have two colors, red going to green, but you could have an array of three stops, and have red going to blue going to green. The stops are between 0 and 1, where 0.33 is a third of the way through the gradient.
+        let colorLocations: [CGFloat] = [0.0, 1.0]
+        
+        //Create the actual gradient, defining the color space, colors and color stops.
+        let gradient = CGGradient(colorsSpace: colorSpace,
+                                  colors: colors as CFArray,
+                                  locations: colorLocations)!
+        
+        // Finally, you draw the gradient.
+        let startPoint = CGPoint.zero
+        let endPoint = CGPoint(x: 0, y: bounds.height)
+        context.drawLinearGradient(gradient,
+                                   start: startPoint,
+                                   end: endPoint,
+                                   options: [])
+        
         
         //calculate the x point
         let margin = Constants.margin
@@ -73,13 +96,13 @@ class GraphView: UIView {
         }
         
         graphPath.stroke()
-
+        context.saveGState()
         
         
         //Create the clipping path for the graph gradient
         
-        //1 - save the state of the context (commented out for now)
-        //context.saveGState()
+        //1 - save the state of the context.
+        context.saveGState()
         
         //2 - make a copy of the path
         let clippingPath = graphPath.copy() as! UIBezierPath
@@ -92,11 +115,64 @@ class GraphView: UIView {
         //4 - add the clipping path to the context
         clippingPath.addClip()
         
-        //5 - check clipping path - temporary code
-        UIColor.green.setFill()
-        let rectPath = UIBezierPath(rect: rect)
-        rectPath.fill()
-        //end temporary code
+        
+        
+        
+        //Add gradient
+        let highestYPoint = columnYPoint(maxValue)
+        let graphStartPoint = CGPoint(x: margin, y: highestYPoint)
+        let graphEndPoint = CGPoint(x: margin, y: bounds.height)
+        
+        
+        context.drawLinearGradient(gradient, start: graphStartPoint, end: graphEndPoint, options: [])
+        context.restoreGState()
+        
+        
+        graphPath.lineWidth = 2.0
+        graphPath.stroke()
+        
+        
+        //Drawing point value
+        //Draw the circles on top of the graph stroke
+        for i in 0..<graphPoints.count {
+            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(graphPoints[i]))
+            point.x -= Constants.circleDiameter / 2
+            point.y -= Constants.circleDiameter / 2
+            
+            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
+            circle.fill()
+        }
+        
+        //drawing the lines
+        let linePath = UIBezierPath()
+        
+        //top line
+        linePath.move(to: CGPoint(x: margin, y: topBorder))
+        linePath.addLine(to: CGPoint(x: width - margin, y: topBorder))
+        
+        //center line
+        linePath.move(to: CGPoint(x: margin, y: graphHeight/2 + topBorder))
+        linePath.addLine(to: CGPoint(x: width - margin, y: graphHeight/2 + topBorder))
+        
+        //bottom line
+        linePath.move(to: CGPoint(x: margin, y: height - bottomBorder))
+        linePath.addLine(to: CGPoint(x: width - margin, y: height - bottomBorder))
+        
+        
+        let color = UIColor(white: 1.0, alpha: Constants.colorAlpha)
+        color.setStroke()
+        linePath.lineWidth = 1.0
+        linePath.stroke()
+        
+        
+        print("graphHeight = \(graphHeight)")
+        print("graphWidth = \(graphWidth)")
+        print("height = \(height)")
+        print("width = \(width)")
+        print("bottomBorder = \(bottomBorder)")
+        print("topBorder = \(topBorder)")
+        print("margin = \(margin)")
+        
         
     }
     
@@ -106,31 +182,6 @@ class GraphView: UIView {
                                 byRoundingCorners: .allCorners,
                                 cornerRadii: Constants.cornerRadiusSize)
         path.addClip()
-    }
-    
-    private func fillupGradienteColor() {
-        //CG drawing functions need to know the context in which they will draw, so you use the UIKit method UIGraphicsGetCurrentContext() to obtain the current context
-        let context = UIGraphicsGetCurrentContext()!
-        let colors = [startColor.cgColor, endColor.cgColor];
-        
-        // All contexts have a color space. This could be CMYK or grayscale, but here you’re using the RGB color space.
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        // The color stops describe where the colors in the gradient change over. In this example, you only have two colors, red going to green, but you could have an array of three stops, and have red going to blue going to green. The stops are between 0 and 1, where 0.33 is a third of the way through the gradient.
-        let colorLocations: [CGFloat] = [0.0, 1.0]
-        
-        //Create the actual gradient, defining the color space, colors and color stops.
-        let gradient = CGGradient(colorsSpace: colorSpace,
-                                  colors: colors as CFArray,
-                                  locations: colorLocations)!
-        
-        // Finally, you draw the gradient.
-        let startPoint = CGPoint.zero
-        let endPoint = CGPoint(x: 0, y: bounds.height)
-        context.drawLinearGradient(gradient,
-                                   start: startPoint,
-                                   end: endPoint,
-                                   options: [])
     }
 
 }
