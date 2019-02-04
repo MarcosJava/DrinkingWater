@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var counterView: CounterView!
+    @IBOutlet weak var graphView: GraphView!
+    @IBOutlet weak var containerView: UIView!
+    
     @IBOutlet weak var counterLabel: UILabel!
     
     var counter: Int = 5 {
@@ -20,11 +23,37 @@ class ViewController: UIViewController {
             counterLabel.text = String(describing: counter)
         }
     }
+    
+    var isGraphViewShowing: Bool = false {
+        didSet {
+            
+            if isGraphViewShowing {
+                UIView.transition(from: graphView,
+                                  to: counterView,
+                                  duration: 1.0,
+                                  options: [.transitionFlipFromLeft, .showHideTransitionViews])
+                
+            } else {
+                
+                UIView.transition(from: counterView,
+                                  to: graphView,
+                                  duration: 1.0,
+                                  options: [.transitionFlipFromRight, .showHideTransitionViews])
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let gestureTap = UITapGestureRecognizer(target: self, action: #selector(counterTapView(_ :)))
+        containerView.addGestureRecognizer(gestureTap)
     }
 
+    @objc func counterTapView(_ gesture: UITapGestureRecognizer?) {
+        isGraphViewShowing = !isGraphViewShowing
+        
+    }
+    
     @IBAction func pushButtonPressed(_ button: PushButton) {
         counter = button.isAddButton ? counter + 1 : counter - 1
     }

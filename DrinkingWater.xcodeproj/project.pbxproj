@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		180DB06B2203DDC800AB1427 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180DB06A2203DDC800AB1427 /* CounterView.swift */; };
+		188B7FFF22072BEE00FB3DEA /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B7FFE22072BEE00FB3DEA /* GraphView.swift */; };
 		18BD627D2203A7EB0009A965 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD627C2203A7EB0009A965 /* AppDelegate.swift */; };
 		18BD627F2203A7EB0009A965 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD627E2203A7EB0009A965 /* ViewController.swift */; };
 		18BD62822203A7EB0009A965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BD62802203A7EB0009A965 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		180DB06A2203DDC800AB1427 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		188B7FFE22072BEE00FB3DEA /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		18BD62792203A7EB0009A965 /* DrinkingWater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkingWater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BD627C2203A7EB0009A965 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18BD627E2203A7EB0009A965 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				18BD627C2203A7EB0009A965 /* AppDelegate.swift */,
 				18BD627E2203A7EB0009A965 /* ViewController.swift */,
 				18BD62802203A7EB0009A965 /* Main.storyboard */,
+				188B7FFE22072BEE00FB3DEA /* GraphView.swift */,
 				18BD62832203A7EC0009A965 /* Assets.xcassets */,
 				18BD62852203A7EC0009A965 /* LaunchScreen.storyboard */,
 				18BD62882203A7EC0009A965 /* Info.plist */,
@@ -145,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188B7FFF22072BEE00FB3DEA /* GraphView.swift in Sources */,
 				18BD627F2203A7EB0009A965 /* ViewController.swift in Sources */,
 				18BD627D2203A7EB0009A965 /* AppDelegate.swift in Sources */,
 				18BD628F2203A8070009A965 /* PushButton.swift in Sources */,
@@ -225,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -280,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
